@@ -35,8 +35,8 @@ F_C = (16*sigma_SB*T**3)/(3*kappaC*rho)*gradT
 plt.figure(figsize=(6,4))
 
 plt.plot(T,F_A,'-',lw=2,label=r'$\kappa \propto r^2$')
-plt.plot(T,F_B,'--',lw=2,label=r'$\kappa \propto r$')
-plt.plot(T,F_C,'-.',lw=2,label=r'$\kappa \propto e^{-r/R_0}$')
+plt.plot(T,F_B,'-',lw=2,label=r'$\kappa \propto r$')
+plt.plot(T,F_C,'-',lw=2,label=r'$\kappa \propto e^{-r/R_0}$')
 
 plt.xlabel("Temperature (K)")
 plt.ylabel("Radiative Flux")
@@ -57,8 +57,8 @@ F_c_r = (16*sigma_SB*T_fixed**3)/(3*kappa_c*rho)*gradT
 plt.figure(figsize=(6,4))
 
 plt.plot(r,F_a_r,'-',lw=2,label=r'$\kappa \propto r^2$')
-plt.plot(r,F_b_r,'--',lw=2,label=r'$\kappa \propto r$')
-plt.plot(r,F_c_r,'-.',lw=2,label=r'$\kappa \propto e^{-r/R_0}$')
+plt.plot(r,F_b_r,'-',lw=2,label=r'$\kappa \propto r$')
+plt.plot(r,F_c_r,'-',lw=2,label=r'$\kappa \propto e^{-r/R_0}$')
 
 plt.xlabel("Radius r")
 plt.ylabel("Radiative Flux")
