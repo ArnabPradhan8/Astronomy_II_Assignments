@@ -1,27 +1,88 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-R0=1
-a0=1
+# PARAMETERS
+R0 = 1
+a0 = 1
 
-r=np.linspace(0.01,R0,200)
+r = np.linspace(0.01, R0, 200)
+theta = np.linspace(0, 2*np.pi, 200)
 
-# case a
-tau_a = (a0*np.pi/2)*(R0**2-r**2)
+# RADIAL DEPENDENCE : tau(r)
 
-# case b
-tau_b = a0*(R0*(r+R0)*np.exp(-r/R0)-2*R0**2*np.exp(-1))
-tau_b = 2*np.pi*tau_b
+# Case (a)
+tau_a_r = (a0*np.pi/2)*(R0**2 - r**2)
 
-# case c
-tau_c = a0*(-R0**2/4 - (r**2/2)*np.log(r/R0) + r**2/4)
-tau_c = 2*np.pi*tau_c
+# Case (b)
+tau_b_r = a0*(R0*(r+R0)*np.exp(-r/R0) - 2*R0**2*np.exp(-1))
+tau_b_r = 2*np.pi*tau_b_r
 
-plt.plot(r,tau_a,label="case a")
-plt.plot(r,tau_b,label="case b")
-plt.plot(r,tau_c,label="case c")
+# Case (c)
+tau_c_r = a0*(-R0**2/4 - (r**2/2)*np.log(r/R0) + r**2/4)
+tau_c_r = 2*np.pi*tau_c_r
 
-plt.xlabel("r")
-plt.ylabel("tau(r)")
+
+plt.figure(figsize=(6,4))
+
+plt.plot(r, tau_a_r, label="Case (a)")
+plt.plot(r, tau_b_r, label="Case (b)")
+plt.plot(r, tau_c_r, label="Case (c)")
+
+plt.xlabel("Radius r")
+plt.ylabel("Optical Depth τ(r)")
+plt.title("Radial Dependence of Optical Depth")
+
 plt.legend()
+plt.grid()
+
+plt.show()
+
+# ANGULAR DEPENDENCE : tau(r,theta)
+# choosing two radii
+r1 = R0/2
+r2 = R0/4
+
+
+# Case (a)
+tau_a_theta_r1 = a0*np.cos(theta)**2*(R0**2 - r1**2)/2
+tau_a_theta_r2 = a0*np.cos(theta)**2*(R0**2 - r2**2)/2
+
+
+# Case (b) (independent of theta)
+
+tau_b_r1 = a0*(R0*(r1+R0)*np.exp(-r1/R0) - 2*R0**2*np.exp(-1))
+tau_b_r2 = a0*(R0*(r2+R0)*np.exp(-r2/R0) - 2*R0**2*np.exp(-1))
+
+tau_b_theta_r1 = np.ones_like(theta)*tau_b_r1
+tau_b_theta_r2 = np.ones_like(theta)*tau_b_r2
+
+
+# Case (c) (independent of theta)
+
+tau_c_r1 = a0*(-R0**2/4 - (r1**2/2)*np.log(r1/R0) + r1**2/4)
+tau_c_r2 = a0*(-R0**2/4 - (r2**2/2)*np.log(r2/R0) + r2**2/4)
+
+tau_c_theta_r1 = np.ones_like(theta)*tau_c_r1
+tau_c_theta_r2 = np.ones_like(theta)*tau_c_r2
+
+
+plt.figure(figsize=(6,4))
+
+plt.plot(theta, tau_a_theta_r1, label="Case (a)  r=R0/2")
+plt.plot(theta, tau_a_theta_r2, label="Case (a)  r=R0/4")
+
+plt.plot(theta, tau_b_theta_r1, '--', label="Case (b) r=R0/2")
+plt.plot(theta, tau_b_theta_r2, '--', label="Case (b) r=R0/4")
+
+plt.plot(theta, tau_c_theta_r1, ':', label="Case (c) r=R0/2")
+plt.plot(theta, tau_c_theta_r2, ':', label="Case (c) r=R0/4")
+
+
+plt.xlabel("Angle θ")
+plt.ylabel("Optical Depth τ(r,θ)")
+plt.title("Angular Dependence of Optical Depth")
+
+plt.legend()
+plt.grid()
+
 plt.show()
